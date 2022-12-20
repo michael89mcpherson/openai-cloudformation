@@ -1,18 +1,49 @@
+AWSTemplateFormatVersion: 2010-09-09
+Description: Initial VPC
+
+################################################################################
+# NOTES
+################################################################################
+#### Going to need add tags
+
+################################################################################
+# METADATA
+################################################################################
+
+################################################################################
+# PARAMETERS
+################################################################################
+
+################################################################################
+# RESOURCES
+################################################################################
+
 Resources:
+#### VPC
   VPC:
     Type: AWS::EC2::VPC
     Properties:
+    ##### CIDR Block should be a paraemter to be more dynamic
       CidrBlock: 10.0.0.0/16
       EnableDnsSupport: true
       EnableDnsHostnames: true
+      
+    ##### I find this interesting but I like the named host option, parameter? client name?
+    ##### Could this improve io, 1 tenant on dedicated hosts 
       InstanceTenancy: default
+
+#### Internet Gateway
   InternetGateway:
     Type: AWS::EC2::InternetGateway
+
+#### Gateway Attachement
   VPCGatewayAttachment:
     Type: AWS::EC2::VPCGatewayAttachment
     Properties:
       InternetGatewayId: !Ref InternetGateway
       VpcId: !Ref VPC
+      
+#### Public Subnet
   PublicSubnet1:
     Type: AWS::EC2::Subnet
     Properties:
@@ -20,6 +51,8 @@ Resources:
       CidrBlock: 10.0.1.0/24
       AvailabilityZone: us-east-1a
       MapPublicIpOnLaunch: true
+      
+#### Public Subnet
   PublicSubnet2:
     Type: AWS::EC2::Subnet
     Properties:
@@ -27,6 +60,8 @@ Resources:
       CidrBlock: 10.0.2.0/24
       AvailabilityZone: us-east-1b
       MapPublicIpOnLaunch: true
+      
+#### Public Subnet
   PrivateSubnet1:
     Type: AWS::EC2::Subnet
     Properties:
@@ -34,6 +69,8 @@ Resources:
       CidrBlock: 10.0.3.0/24
       AvailabilityZone: us-east-1a
       MapPublicIpOnLaunch: false
+      
+#### Public Subnet
   PrivateSubnet2:
     Type: AWS::EC2::Subnet
     Properties:
@@ -41,10 +78,14 @@ Resources:
       CidrBlock: 10.0.4.0/24
       AvailabilityZone: us-east-1b
       MapPublicIpOnLaunch: false
+
+#### Public Route Tables
   PublicRouteTable:
     Type: AWS::EC2::RouteTable
     Properties:
       VpcId: !Ref VPC
+      
+#### Private Route Tables
   PrivateRouteTable1:
     Type: AWS::EC2::RouteTable
     Properties:
@@ -53,6 +94,8 @@ Resources:
     Type: AWS::EC2::RouteTable
     Properties:
       VpcId: !Ref VPC
+      
+#### Public Subnet Route Associations
   PublicSubnet1RouteTableAssociation:
     Type: AWS::EC2::SubnetRouteTableAssociation
     Properties:
@@ -63,6 +106,8 @@ Resources:
     Properties:
       SubnetId: !Ref PublicSubnet2
       RouteTableId: !Ref PublicRouteTable
+      
+#### Private Subnet Association
   PrivateSubnet1RouteTableAssociation:
     Type: AWS::EC2::SubnetRouteTableAssociation
     Properties:
@@ -73,6 +118,14 @@ Resources:
     Properties:
       SubnetId: !Ref PrivateSubnet2
       RouteTableId: !Ref PrivateRouteTable2
+      
+#### Private Route Table
   PublicRoute:
     Type: AWS::EC2::Route
     DependsOn:
+    
+    
+    
+################################################################################
+# OUTPUTS
+################################################################################

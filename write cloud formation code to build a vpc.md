@@ -1,3 +1,4 @@
+```
 Resources:
   VPC:
     Type: AWS::EC2::VPC
@@ -76,3 +77,4 @@ Resources:
   PublicRoute:
     Type: AWS::EC2::Route
     DependsOn:
+```

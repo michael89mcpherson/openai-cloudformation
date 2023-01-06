@@ -22,7 +22,7 @@ Resources:
 ```
 The !FindInMap function takes three arguments: the mapping name, the key to look up, and the name of the value to return. In this example, the function will look up the AMI ID for the current region in the RegionMap mapping.
 
-Conditions
+### Conditions
 Conditions allow you to specify when a resource or property should be created or included in a stack. Conditions are defined in the Conditions section of the template and can be referenced in the Resources or Outputs sections.
 
 Here is an example of a Conditions section in a CloudFormation template:
@@ -49,7 +49,7 @@ Outputs:
 ```
 In this example, the ProdInstance resource and the ProdInstanceId output will only be created if the CreateProdResources condition is true.
 
-Logical Functions
+### Logical Functions
 CloudFormation provides several functions that allow you to perform logical operations in your templates. These functions include:
 
 !And: Returns true if all the specified conditions are true, and false otherwise.

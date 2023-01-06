@@ -1,4 +1,4 @@
-Mappings
+### Mappings
 Mappings allow you to create a set of key-value pairs that you can reference in your CloudFormation template. Mappings can be used to specify values that depend on the region or the instance type, for example.
 
 Here is an example of a Mappings section in a CloudFormation template:

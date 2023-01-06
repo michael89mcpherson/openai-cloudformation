@@ -52,9 +52,10 @@ In this example, the ProdInstance resource and the ProdInstanceId output will on
 ### Logical Functions
 CloudFormation provides several functions that allow you to perform logical operations in your templates. These functions include:
 
-!And: Returns true if all the specified conditions are true, and false otherwise.
-!Or: Returns true if at least one of the specified conditions is true, and false otherwise.
-!Not: Returns the logical opposite of a condition. If the condition is true, !Not returns false, and vice versa.
+- !And: Returns true if all the specified conditions are true, and false otherwise.
+- !Or: Returns true if at least one of the specified conditions is true, and false otherwise.
+- !Not: Returns the logical opposite of a condition. If the condition is true, !Not returns false, and vice versa.
+
 Here is an example of how to use the !And function:
 ```
 Conditions:
